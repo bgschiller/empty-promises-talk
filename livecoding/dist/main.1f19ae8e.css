@@ -1,0 +1,32 @@
+.login[data-v-f25753] {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.login .success[data-v-f25753] {
+  color: green;
+}
+.login .error[data-v-f25753] {
+  color: red;
+}
+.login form[data-v-f25753] {
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto;
+  width: 200px;
+}
+.login form label[data-v-f25753] {
+  margin-bottom: 10px;
+}
+.profile {
+  max-width: 600px;
+  margin: 0 auto;
+}
+#app {
+  padding: 40px;
+}
+#app .router-link-exact-active {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  cursor: default;
+}
