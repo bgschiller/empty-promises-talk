@@ -2,40 +2,19 @@
 ## by Brian Schiller
 
 ---
-
-### Loading an image in JS
+## Definition
 
 ```javascript
-function imageSize(url) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-
-    img.onload = function() {
-      resolve({ width: this.width, height: this.height });
-    };
-    img.onerror = reject;
-
-    img.src = url;
+function emptyPromise() {
+  let callbacks;
+  const p = new Promise((resolve, reject) => {
+    callbacks = { resolve, reject };
   });
-}
-```
 
----
+  p.resolve = (val) => callbacks.resolve(val);
+  p.reject = (val) => callbacks.reject(val);
 
-### Loading an image in JS
-
-```javascript
-function imageSize(url) {
-  const prom = emptyPromise();
-  const img = new Image();
-
-  img.onload = function() {
-    prom.resolve({ width: this.width, height: this.height });
-  };
-  img.onerror = prom.reject;
-
-  img.src = url;
-  return prom;
+  return p;
 }
 ```
 
@@ -71,23 +50,7 @@ function fileContents(path) {
 }
 ```
 ---
-## Definition
-
-```javascript
-function emptyPromise() {
-  let callbacks;
-  const p = new Promise((resolve, reject) => {
-    callbacks = { resolve, reject };
-  });
-
-  p.resolve = (val) => callbacks.resolve(val);
-  p.reject = (val) => callbacks.reject(val);
-
-  return p;
-}
-```
----
-
+[.autoscale: true]
 
 ## When might you use it?
 
@@ -274,3 +237,17 @@ What if someone requests `hagridPromise('notYetDispatched')`?
     this.promises[actionName] = p;
   }
 ```
+---
+[.autoscale: true]
+# Thank you!
+
+<br><br>
+`brian@brianschiller.com`
+
+Twitter, Github, Denver Devs: `@bgschiller`
+
+
+- slides: `github.com/bgschiller/empty-promises-talk`
+- `github.com/binded/empty-promise`
+- `github.com/bgschiller/vue-hagrid`
+

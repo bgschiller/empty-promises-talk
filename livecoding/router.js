@@ -17,13 +17,15 @@ const router = new Router({
 });
 
 router.beforeEach((to, _from, next) => {
-  const isLoggedIn = store.getters.isLoggedIn;
-  console.log('in router auth guard. isLoggedIn?', isLoggedIn);
-  if (!isLoggedIn && to.matched.some(record => record.meta.requiresAuth)) {
-    console.log('user is not logged in and route requires auth. redirecting to login');
-    next({ path: '/login' });
-    return;
-  }
-  next();
+  store.getters.loginSettled.then(() => {
+    const isLoggedIn = store.getters.isLoggedIn;
+    console.log('in router auth guard. isLoggedIn?', isLoggedIn);
+    if (!isLoggedIn && to.matched.some(record => record.meta.requiresAuth)) {
+      console.log('user is not logged in and route requires auth. redirecting to login');
+      next({ path: '/login' });
+      return;
+    }
+    next();
+  });
 });
 export default router;

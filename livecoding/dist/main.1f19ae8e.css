@@ -1,20 +1,20 @@
-.login[data-v-f25753] {
+.login[data-v-fa3c6e] {
   max-width: 600px;
   margin: 0 auto;
 }
-.login .success[data-v-f25753] {
+.login .success[data-v-fa3c6e] {
   color: green;
 }
-.login .error[data-v-f25753] {
+.login .error[data-v-fa3c6e] {
   color: red;
 }
-.login form[data-v-f25753] {
+.login form[data-v-fa3c6e] {
   display: flex;
   flex-direction: column;
   margin: 30px auto;
   width: 200px;
 }
-.login form label[data-v-f25753] {
+.login form label[data-v-fa3c6e] {
   margin-bottom: 10px;
 }
 .profile {

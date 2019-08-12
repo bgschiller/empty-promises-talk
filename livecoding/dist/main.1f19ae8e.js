@@ -12692,14 +12692,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $f25753 = exports.default || module.exports;
+        var $fa3c6e = exports.default || module.exports;
       
-      if (typeof $f25753 === 'function') {
-        $f25753 = $f25753.options;
+      if (typeof $fa3c6e === 'function') {
+        $fa3c6e = $fa3c6e.options;
       }
     
         /* template */
-        Object.assign($f25753, (function () {
+        Object.assign($fa3c6e, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12786,44 +12786,17 @@ exports.default = _default;
           ? _c("p", { staticClass: "error" }, [_vm._v(_vm._s(_vm.error))])
           : _vm._e()
       ]
-    ),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v(
-        "\n    Welcome! For the first challenge, reproduce and then fix this bug:\n  "
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ol", [
-      _c("li", [
-        _vm._v(
-          "Log in with the wrong username or password. You should (correctly) see an error message appear"
-        )
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _vm._v(
-          "Now enter the correct information. The login form displays success, but does not remove the error message or take you to the next page."
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: "data-v-f25753",
+            _scopeId: "data-v-fa3c6e",
             functional: undefined
           };
         })());
@@ -12836,9 +12809,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$f25753', $f25753);
+            api.createRecord('$fa3c6e', $fa3c6e);
           } else {
-            api.reload('$f25753', $f25753);
+            api.reload('$fa3c6e', $fa3c6e);
           }
         }
 
@@ -12878,14 +12851,14 @@ var _default = {
   computed: (0, _vuex.mapState)(['user'])
 };
 exports.default = _default;
-        var $2d29c1 = exports.default || module.exports;
+        var $ffab9f = exports.default || module.exports;
       
-      if (typeof $2d29c1 === 'function') {
-        $2d29c1 = $2d29c1.options;
+      if (typeof $ffab9f === 'function') {
+        $ffab9f = $ffab9f.options;
       }
     
         /* template */
-        Object.assign($2d29c1, (function () {
+        Object.assign($ffab9f, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -12910,9 +12883,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", [
-      _vm._v(
-        "\n    Welcome to the second challenge. Your login information\n    "
-      ),
+      _vm._v("\n    Your login information\n    "),
       _c("em", [_vm._v("should")]),
       _vm._v(
         "\n    be saved in a cookie. But if you refresh this page it takes you back to /login. What gives?\n  "
@@ -12939,9 +12910,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$2d29c1', $2d29c1);
+            api.createRecord('$ffab9f', $ffab9f);
           } else {
-            api.reload('$2d29c1', $2d29c1);
+            api.reload('$ffab9f', $ffab9f);
           }
         }
 
@@ -12996,7 +12967,38 @@ function userInfo(token) {
     throw new Error("uh oh, that looks like an invalid token...");
   });
 }
-},{"./utils":"utils.js"}],"store.js":[function(require,module,exports) {
+},{"./utils":"utils.js"}],"node_modules/empty-promise/lib/index.js":[function(require,module,exports) {
+"use strict";
+
+module.exports = function () {
+  var callbacks;
+  var done = false;
+  var p = new Promise(function (resolve, reject) {
+    callbacks = {
+      resolve: resolve,
+      reject: reject
+    };
+  });
+
+  p.done = function () {
+    return done;
+  };
+
+  p.resolve = function (val) {
+    callbacks.resolve(val);
+    done = true;
+    return p;
+  };
+
+  p.reject = function (val) {
+    callbacks.reject(val);
+    done = true;
+    return p;
+  };
+
+  return p;
+};
+},{}],"store.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13010,6 +13012,8 @@ var _vuex = _interopRequireWildcard(require("vuex"));
 
 var api = _interopRequireWildcard(require("./api"));
 
+var _emptyPromise = _interopRequireDefault(require("empty-promise"));
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -13021,6 +13025,9 @@ var state = {
   error: null,
   loading: false
 };
+
+var _loginSettled = (0, _emptyPromise.default)();
+
 var actions = {
   login: function login(_ref, _ref2) {
     var commit = _ref.commit;
@@ -13028,6 +13035,7 @@ var actions = {
         password = _ref2.password;
 
     if (!username || !password) {
+      console.log('login info was incomplete. setting error.');
       commit('LOGIN_ERROR', 'please fill in both username and password');
       return;
     }
@@ -13037,7 +13045,8 @@ var actions = {
       commit('SET_USER_INFO', resp.user);
       document.cookie = "user=".concat(resp.token);
     }).catch(function (err) {
-      return commit('LOGIN_ERROR', err.message);
+      console.log('login info was incorrect. setting error.');
+      commit('LOGIN_ERROR', err.message);
     });
   },
   logOut: function logOut(_ref3) {
@@ -13052,7 +13061,13 @@ var actions = {
     var tokenCookie = document.cookie.split(/;\s*/).find(function (item) {
       return item.startsWith('user=');
     });
-    if (!tokenCookie) return;
+
+    if (!tokenCookie) {
+      _loginSettled.resolve();
+
+      return;
+    }
+
     var token = tokenCookie.split('=')[1];
     console.log('found a token in cookies, querying api');
     commit('LOADING');
@@ -13062,6 +13077,8 @@ var actions = {
     }).catch(function () {
       commit('DONE_LOADING');
       console.log('invalid token.');
+    }).finally(function () {
+      return _loginSettled.resolve();
     });
   }
 };
@@ -13075,6 +13092,7 @@ var mutations = {
     state.loading = false;
   },
   LOADING: function LOADING(state) {
+    state.error = null;
     state.loading = true;
   },
   DONE_LOADING: function DONE_LOADING(state) {
@@ -13084,6 +13102,9 @@ var mutations = {
 var getters = {
   isLoggedIn: function isLoggedIn(state) {
     return state.user !== null;
+  },
+  loginSettled: function loginSettled() {
+    return _loginSettled;
   }
 };
 
@@ -13095,7 +13116,7 @@ var _default = new _vuex.Store({
 });
 
 exports.default = _default;
-},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","vuex":"node_modules/vuex/dist/vuex.esm.js","./api":"api.js"}],"router.js":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","vuex":"node_modules/vuex/dist/vuex.esm.js","./api":"api.js","empty-promise":"node_modules/empty-promise/lib/index.js"}],"router.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13132,20 +13153,22 @@ var router = new _vueRouter.default({
   mode: 'history'
 });
 router.beforeEach(function (to, _from, next) {
-  var isLoggedIn = _store.default.getters.isLoggedIn;
-  console.log('in router auth guard. isLoggedIn?', isLoggedIn);
+  _store.default.getters.loginSettled.then(function () {
+    var isLoggedIn = _store.default.getters.isLoggedIn;
+    console.log('in router auth guard. isLoggedIn?', isLoggedIn);
 
-  if (!isLoggedIn && to.matched.some(function (record) {
-    return record.meta.requiresAuth;
-  })) {
-    console.log('user is not logged in and route requires auth. redirecting to login');
-    next({
-      path: '/login'
-    });
-    return;
-  }
+    if (!isLoggedIn && to.matched.some(function (record) {
+      return record.meta.requiresAuth;
+    })) {
+      console.log('user is not logged in and route requires auth. redirecting to login');
+      next({
+        path: '/login'
+      });
+      return;
+    }
 
-  next();
+    next();
+  });
 });
 var _default = router;
 exports.default = _default;
@@ -13185,17 +13208,20 @@ var _default = {
       });
     }
   },
-  computed: (0, _vuex.mapGetters)(['isLoggedIn'])
+  computed: (0, _vuex.mapGetters)(['isLoggedIn']),
+  mounted: function mounted() {
+    this.$store.dispatch('checkLogin');
+  }
 };
 exports.default = _default;
-        var $4dfb2c = exports.default || module.exports;
+        var $6bd48e = exports.default || module.exports;
       
-      if (typeof $4dfb2c === 'function') {
-        $4dfb2c = $4dfb2c.options;
+      if (typeof $6bd48e === 'function') {
+        $6bd48e = $6bd48e.options;
       }
     
         /* template */
-        Object.assign($4dfb2c, (function () {
+        Object.assign($6bd48e, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -13249,9 +13275,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$4dfb2c', $4dfb2c);
+            api.createRecord('$6bd48e', $6bd48e);
           } else {
-            api.reload('$4dfb2c', $4dfb2c);
+            api.reload('$6bd48e', $6bd48e);
           }
         }
 
@@ -13311,7 +13337,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62565" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65480" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
