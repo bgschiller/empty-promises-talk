@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex, { Store } from 'vuex';
 import * as api from './api';
-import emptyPromise from 'empty-promise';
 Vue.use(Vuex);
 
 const state = {
@@ -9,8 +8,6 @@ const state = {
   error: null,
   loading: false,
 };
-
-const loginSettled = emptyPromise();
 
 const actions = {
   login({ commit }, { username, password }) {
@@ -44,7 +41,6 @@ const actions = {
       .find((item) => item.startsWith('user='));
 
       if (!tokenCookie) {
-        loginSettled.resolve();
         return;
       }
 
@@ -60,8 +56,7 @@ const actions = {
       .catch(() => {
         commit('DONE_LOADING');
         console.log('invalid token.')
-      })
-      .finally(() => loginSettled.resolve());
+      });
   },
 };
 
@@ -86,9 +81,6 @@ const mutations = {
 const getters = {
   isLoggedIn(state) {
     return state.user !== null;
-  },
-  loginSettled() {
-    return loginSettled;
   },
 }
 
