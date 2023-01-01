@@ -4,7 +4,7 @@
   "description": "",
   "dependencies": {
     "empty-promise": "^1.2.0",
-    "parcel": "^1.12.3",
+    "parcel": "^2.8.2",
     "vue": "^2.6.10",
     "vue-hot-reload-api": "^2.3.3",
     "vue-router": "^3.0.7",
